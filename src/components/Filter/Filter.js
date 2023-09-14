@@ -12,6 +12,7 @@ export const Filter = ({ changeFilter }) => {
         onChange={line => {
           changeFilter(line.target.value);
         }}
+        autocomplete="off"
         required
       />
     </FilterForm>
