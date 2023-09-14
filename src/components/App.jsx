@@ -43,7 +43,7 @@ export class App extends Component {
     if (
       this.state.contacts
         .map(items => {
-          return items.name.toLowerCase() == name.toLowerCase();
+          return items.name.toLowerCase() === name.toLowerCase();
         })
         .includes(true)
     )
