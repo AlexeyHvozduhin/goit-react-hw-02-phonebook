@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { Field, ErrorMessage, Form } from 'formik';
 
 export const FilterForm = styled.div`
   display: flex;
