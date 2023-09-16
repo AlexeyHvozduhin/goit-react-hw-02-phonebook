@@ -5,10 +5,10 @@ import {
   ContactTitle,
 } from './ContactList.styled';
 
-export const ContactList = ({ getVisibleContacts, deleteContact }) => {
+export const ContactList = ({ contacts, deleteContact }) => {
   return (
     <ContactsList>
-      {getVisibleContacts().map(contacts => {
+      {contacts.map(contacts => {
         return (
           <ContactListItem key={contacts.id}>
             <ContactTitle>

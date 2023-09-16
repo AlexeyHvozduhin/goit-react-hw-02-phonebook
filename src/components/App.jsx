@@ -23,8 +23,6 @@ export class App extends Component {
       { id: 'id-12', name: 'Frodo Baggins', number: '786-54-73' },
     ],
     filter: '',
-    name: '',
-    number: '',
   };
 
   changeName = line => {
@@ -39,23 +37,16 @@ export class App extends Component {
     });
   };
 
-  addContacts = (name, number) => {
-    if (
-      this.state.contacts
-        .map(items => {
-          return items.name.toLowerCase() === name.toLowerCase();
-        })
-        .includes(true)
-    )
-      window.alert(`${this.state.name} is already in contacts.`);
-    else {
-      this.setState(prevState => ({
-        contacts: [
-          ...prevState.contacts,
-          { id: nanoid(), name: name, number: number },
-        ],
-      }));
-    }
+  addContacts = ({ name, number }) => {
+    const isDuplicate = this.state.contacts.some(items => {
+      return items.name.toLowerCase() === name.toLowerCase();
+    });
+
+    if (isDuplicate) return window.alert(`${name} is already in contacts.`);
+
+    this.setState(prevState => ({
+      contacts: [{ id: nanoid(), name, number }, ...prevState.contacts],
+    }));
   };
 
   deleteContact = id => {
@@ -90,14 +81,10 @@ export class App extends Component {
         }}
       >
         <Title />
-        <ContactForm
-          changeName={this.changeName}
-          changeNumber={this.changeNumber}
-          addContacts={this.addContacts}
-        />
+        <ContactForm addContacts={this.addContacts} />
         <Filter changeFilter={this.changeFilter} />
         <ContactList
-          getVisibleContacts={this.getVisibleContacts}
+          contacts={this.getVisibleContacts()}
           deleteContact={this.deleteContact}
         />
       </div>
